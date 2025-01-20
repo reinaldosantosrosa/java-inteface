@@ -1,11 +1,12 @@
 package br.paypal.application;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
 import br.paypal.model.entities.Contrato;
+import br.paypal.model.entities.Installment;
 import br.paypal.services.ContractService;
 import br.paypal.services.PaypalService;
 
@@ -16,21 +17,24 @@ public class Main {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		System.out.println("Informe com os dados do Contrato");
 		
-		System.out.println("Numero do Contratao:");
-		int nContrato = Integer.parseInt(sc.nextLine());
-		System.out.println("Data do Contratao (dd/MM/yyyy): ");
-		LocalDateTime dDataContrato = LocalDateTime.parse(sc.nextLine(), fmt);
-		System.out.println("Valor do Contratao....:");
-		Double nValorContrato = Double.parseDouble(sc.nextLine());
+		System.out.print("Numero do Contratao:");
+		int nContrato = Integer.parseInt(sc.next());
+		System.out.print("Data do Contratao (dd/MM/yyyy): ");
+		LocalDate dDataContrato = LocalDate.parse(sc.next(),fmt);
+		System.out.print("Valor do Contratao....:");
+		Double nValorContrato = Double.parseDouble(sc.next());
 		
-		System.out.println("Quantidade de Parcelas....:");
-		int nQtdparcelas = Integer.parseInt(sc.nextLine());
+		System.out.print("Quantidade de Parcelas....:");
+		int nQtdparcelas = Integer.parseInt(sc.next());
+		System.out.println("");
 		
 		System.out.println("Parcelas:");
+		System.out.println("");
+		
 
 		Contrato contrato = new Contrato(nContrato,dDataContrato,nValorContrato,nQtdparcelas);
 		
@@ -40,9 +44,10 @@ public class Main {
 		
 		contractservice.processContract(contrato, nQtdparcelas);		
 		
-    	for (int i = 0; i < contrato.getInstallment().size(); i++) {
-		  System.out.println("Vencimento da Parcela " + (i+1) +  ", " + contrato.getInstallment().get(i).getDueDate() + ", com o valor de: " + contrato.getInstallment().get(i).getAmount() );
-     	}
+    	
+    	for (Installment installment : contrato.getInstallment() ) {    		
+    		System.out.println( installment);
+    	}
 					
 		
 		

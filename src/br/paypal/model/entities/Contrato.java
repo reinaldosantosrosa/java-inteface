@@ -1,19 +1,18 @@
 package br.paypal.model.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contrato {
 
 
 private int contrato;
-private LocalDateTime data;
+private LocalDate data;
 private Double valorcontrato;
 private int qtdparcelas;
 
-private List<Installment> installment ;
-
-
+private List<Installment> installment = new ArrayList<>() ;
 
 
 public Contrato() {
@@ -23,8 +22,7 @@ public Contrato() {
 
 
 
-public Contrato(int contrato, LocalDateTime data, Double valorcontrato, int qtdparcelas) {
-	super();
+public Contrato(int contrato, LocalDate data, Double valorcontrato, int qtdparcelas) {
 	this.contrato = contrato;
 	this.data = data;
 	this.valorcontrato = valorcontrato;
@@ -37,6 +35,7 @@ public Contrato(int contrato, LocalDateTime data, Double valorcontrato, int qtdp
 public List<Installment> getInstallment() {
 	
 	return installment;
+	
 }
 
 
@@ -59,13 +58,13 @@ public void setContrato(int contrato) {
 
 
 
-public LocalDateTime getData() {
+public LocalDate getData() {
 	return data;
 }
 
 
 
-public void setData(LocalDateTime data) {
+public void setData(LocalDate data) {
 	this.data = data;
 }
 
@@ -74,6 +73,7 @@ public void setData(LocalDateTime data) {
 public Double getValorcontrato() {
 	return valorcontrato;
 }
+
 
 
 

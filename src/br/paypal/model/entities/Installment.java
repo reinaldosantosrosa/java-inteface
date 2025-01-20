@@ -1,11 +1,13 @@
 package br.paypal.model.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Installment {
 
-
-	private LocalDateTime dueDate;
+    private static DateTimeFormatter ftm = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
+	private LocalDate dueDate;
 	private Double amount;
 	
 	private int contrato;
@@ -14,7 +16,7 @@ public class Installment {
 		
 	}
 
-	public Installment(LocalDateTime dueDate, Double amount, int contrato) {
+	public Installment(LocalDate dueDate, Double amount, int contrato) {
 		this.dueDate = dueDate;
 		this.amount = amount;
 		this.contrato = contrato;
@@ -22,11 +24,11 @@ public class Installment {
 	
 	
 	
-	public LocalDateTime getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(LocalDateTime dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -46,6 +48,11 @@ public class Installment {
 		this.contrato = contrato;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Parcela com vencimento em: " + dueDate.format(ftm) + ", no valor de: " + String.format("%.2f",amount);
+	}
 	
 
 }

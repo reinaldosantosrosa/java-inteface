@@ -23,30 +23,21 @@ public class ContractService {
 	
 
 
-	public void processContract(Contrato contrato, int months) {
+	public void processContract(Contrato contrato, int months) {		
 		
 		
-		List<Installment> installment = new ArrayList<Installment>();			
-		double interest;
-		double paymentfee ;
+		double basicQuota = contrato.getValorcontrato() / months;		
+		
 
 		for (int j = 1; j <= months; j++) {		
-			Installment install = new Installment();
-			
-			interest = onlinePaymentService.Interest(contrato.getValorcontrato(), j);
-			paymentfee = onlinePaymentService.PaymentFee(contrato.getValorcontrato()+interest);
-			
-			install.setAmount(contrato.getValorcontrato() + interest + paymentfee );
-			
-			install.setContrato(contrato.getContrato());
-						
-			install.setDueDate(contrato.getData().plusDays(30*j));
-						
-			installment.add(install);
+	
+			double interest = onlinePaymentService.Interest(basicQuota, j);
+			double paymentfee = onlinePaymentService.PaymentFee(basicQuota+interest);
+					
+			contrato.getInstallment().add(new Installment(contrato.getData().plusDays(30*j),basicQuota+ interest + paymentfee , contrato.getContrato()));
 		}
 		
-	     contrato.setInstallment(installment);		
-		
+	
 		
 	}
 
