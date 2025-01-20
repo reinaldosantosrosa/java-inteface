@@ -13,10 +13,7 @@ public class ContractService {
 	public double vrContrato;
 	public int qtdPacerlas;
 	
-	public double interest;
-	public double paymentfee;
-	
-	
+
 	
 	public ContractService (double vrContrato, int qtdParcelas,OnlinePaymentService onlinePaymentService ) {
 		this.vrContrato = vrContrato;
@@ -30,7 +27,8 @@ public class ContractService {
 		
 		
 		List<Installment> installment = new ArrayList<Installment>();			
-		
+		double interest;
+		double paymentfee ;
 
 		for (int j = 1; j <= months; j++) {		
 			Installment install = new Installment();
